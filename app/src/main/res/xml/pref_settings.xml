@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/settings">
+    <SwitchPreference
+        android:persistent="false"
+        android:key="double_tap"
+        android:title="@string/double_tap" />
+    <PreferenceScreen
+        android:title="@string/u_touch_settings">
+        <intent
+            android:targetPackage="com.android.exsettings"
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.android.exsettings.Settings$UTounchCustomSettingsActivity" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:title="@string/screen_color" >
+        <intent
+            android:targetPackage="com.android.exsettings"
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.android.exsettings.Settings$ScreenTonePrefs" />
+    </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/about">
+    <PreferenceScreen
+        android:summary="@string/author1"
+        android:title="@string/author">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="http://weibo.com/MobilePlayers" />
+    </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>

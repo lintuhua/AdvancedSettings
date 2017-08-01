@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">高级设置</string>
+    <string name="settings">设置</string>
+    <string name="double_tap">双击唤醒</string>
+    <string name="u_touch_settings">U-Touch</string>
+    <string name="screen_color">屏幕色调</string>
+    <string name="about">关于</string>
+    <string name="author">作者 （点击反馈BUG）</string>
+    <string name="author1">专一522</string>
+</resources>
