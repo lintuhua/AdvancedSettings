@@ -2,10 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory android:title="@string/settings">
     <SwitchPreference
+        android:icon="@mipmap/xui_ic_settings_control_center"
         android:persistent="false"
         android:key="double_tap"
         android:title="@string/double_tap" />
     <PreferenceScreen
+        android:icon="@mipmap/xui_ic_settings_utouch"
         android:title="@string/u_touch_settings">
         <intent
             android:targetPackage="com.android.exsettings"
@@ -13,15 +15,27 @@
             android:targetClass="com.android.exsettings.Settings$UTounchCustomSettingsActivity" />
     </PreferenceScreen>
     <PreferenceScreen
+        android:icon="@mipmap/xui_ic_settings_displaylight"
         android:title="@string/screen_color" >
+            <intent
+                android:targetPackage="com.android.exsettings"
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.android.exsettings.Settings$ScreenTonePrefs" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:icon="@mipmap/xui_ic_settings_fingerprint_password"
+        android:title="@string/unlock" >
         <intent
             android:targetPackage="com.android.exsettings"
             android:action="android.intent.action.MAIN"
-            android:targetClass="com.android.exsettings.Settings$ScreenTonePrefs" />
+            android:targetClass="com.android.exsettings.fap.FapFpSettingsActivity">
+        <extra android:name="start_from_settings" android:value="true" />
+        </intent>
     </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about">
     <PreferenceScreen
+        android:icon="@mipmap/xui_ic_settings_about"
         android:summary="@string/author1"
         android:title="@string/author">
         <intent
