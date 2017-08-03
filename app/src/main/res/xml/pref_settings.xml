@@ -6,7 +6,13 @@
         android:persistent="false"
         android:key="double_tap"
         android:title="@string/double_tap" />
-    <PreferenceScreen
+     <SwitchPreference
+            android:icon="@mipmap/xui_ic_settings_control_center"
+            android:persistent="false"
+            android:key="Charging"
+            android:title="@string/Charging"
+            android:summary="@string/Charging1"/>
+        <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_utouch"
         android:title="@string/u_touch_settings">
         <intent
