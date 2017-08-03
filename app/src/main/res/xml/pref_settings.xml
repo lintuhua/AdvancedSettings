@@ -12,7 +12,7 @@
             android:key="Charging"
             android:title="@string/Charging"
             android:summary="@string/Charging1"/>
-        <PreferenceScreen
+     <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_utouch"
         android:title="@string/u_touch_settings">
         <intent
