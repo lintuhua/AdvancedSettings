@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme" parent="@android:style/Theme.Material.Light" >
-        <item name="android:colorPrimary">#ffffff</item>
-        <item name="android:colorPrimaryDark">#ffffff</item>
+    <style name="Theme" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">#efecec</item>
+        <item name="colorPrimaryDark">#efecec</item>
+        <item name="colorAccent">#1e00ff</item>
     </style>
 </resources>
