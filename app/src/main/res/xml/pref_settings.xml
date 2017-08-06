@@ -35,7 +35,6 @@
             android:targetPackage="com.android.exsettings"
             android:action="android.intent.action.MAIN"
             android:targetClass="com.android.exsettings.fap.FapFpSettingsActivity">
-        <extra android:name="start_from_settings" android:value="true" />
         </intent>
     </PreferenceScreen>
     </PreferenceCategory>

@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Miui(this,true);
@@ -126,4 +126,5 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
+
 }
