@@ -1,5 +1,6 @@
 package com.android.advancedsettings;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -7,11 +8,15 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
+
+import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Flyme(this,true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
         getFragmentManager().beginTransaction().replace(R.id.settings, new SettingsFragment()).commit();
@@ -52,6 +57,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public boolean onPreferenceChange(Preference Preference, Object Object) {
+            if (Preference == DoubleTap) {
+                if (DoubleTap.isChecked()) {
+                    Settings.System.putInt(getContentResolver(), "double_tap_enable", 0);
+                } else {
+                    Settings.System.putInt(getContentResolver(), "double_tap_enable", 1);
+                }
+            } else if (Preference == Charging) {
+                if (Charging.isChecked()) {
+                    Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 0);
+                } else {
+                    Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 1);
+                }
+            }
             return true;
         }
 
@@ -73,6 +91,28 @@ public class MainActivity extends AppCompatActivity {
                     Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 0);
                 }
             }
+            return false;
+        }
+    }
+
+    public boolean Flyme(Activity activity, boolean dark) {
+        try {
+            WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+            Field darkFlag = WindowManager.LayoutParams.class.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");
+            Field FlymeFlags = WindowManager.LayoutParams.class.getDeclaredField("meizuFlags");
+            darkFlag.setAccessible(true);
+            FlymeFlags.setAccessible(true);
+            int bit = darkFlag.getInt(null);
+            int value = FlymeFlags.getInt(lp);
+            if (dark) {
+                value |= bit;
+            } else {
+                value &= ~bit;
+            }
+            FlymeFlags.setInt(lp, value);
+            activity.getWindow().setAttributes(lp);
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
