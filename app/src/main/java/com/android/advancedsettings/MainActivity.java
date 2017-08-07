@@ -8,6 +8,7 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
 
 import java.lang.reflect.Field;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         Flyme(this,true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getFragmentManager().beginTransaction().replace(R.id.settings, new SettingsFragment()).commit();
     }
 
