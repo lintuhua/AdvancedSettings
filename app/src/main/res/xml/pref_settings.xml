@@ -7,7 +7,7 @@
         android:key="double_tap"
         android:title="@string/double_tap" />
      <SwitchPreference
-            android:icon="@mipmap/xui_ic_settings_control_center"
+            android:icon="@mipmap/xui_ic_settings_notification_statusbar"
             android:persistent="false"
             android:key="Charging"
             android:title="@string/Charging"
