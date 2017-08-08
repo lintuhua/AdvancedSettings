@@ -2,12 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory android:title="@string/settings">
     <SwitchPreference
-        android:icon="@mipmap/xui_ic_settings_fingerprint_password"
-        android:persistent="false"
-        android:key="fingerprint"
-        android:title="@string/unlock"
-        android:summary="@string/unlock1"/>
-    <SwitchPreference
         android:icon="@mipmap/xui_ic_settings_control_center"
         android:persistent="false"
         android:key="double_tap"

@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         private SwitchPreference Charging;
         private SwitchPreference Proximity;
         private SwitchPreference COVER;
-        private SwitchPreference FINGERPRINT;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -62,13 +61,6 @@ public class MainActivity extends AppCompatActivity {
             } else  {
                 COVER.setChecked(false);
             }
-            if (Settings.System.getInt(getContentResolver(), "mz_fingerprint_use_unlock", 0) == 1) {
-                Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);
-                FINGERPRINT.setChecked(true);
-            } else  {
-                Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 0);
-                FINGERPRINT.setChecked(false);
-            }
         }
 
         public void init() {
@@ -80,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
             Proximity.setOnPreferenceChangeListener(this);
             COVER = (SwitchPreference) findPreference("cover");
             COVER.setOnPreferenceChangeListener(this);
-            FINGERPRINT = (SwitchPreference) findPreference("fingerprint");
-            FINGERPRINT.setOnPreferenceChangeListener(this);
         }
 
         public boolean onPreferenceChange(Preference Preference, Object Object) {
@@ -108,14 +98,6 @@ public class MainActivity extends AppCompatActivity {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
                 } else {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
-                }
-            } else if (Preference == FINGERPRINT){
-                if (!FINGERPRINT.isChecked()) {
-                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);
-                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);
-                } else {
-                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 0);
-                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 0);
                 }
             }
             return true;
@@ -150,20 +132,14 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
                 }
-            } else if (Preference == FINGERPRINT){
-                if (FINGERPRINT.isChecked()) {
-                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);
-                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);
-                } else {
-                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 0);
-                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 0);
-                }
             }
                 return false;
         }
     }
 
     //Settings.Secure.putInt(getContentResolver(), "screen_off_fp_unlock_state", 1);   这个为按压解锁
+    //Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 0);    魅族的指纹解锁开关
+    //Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);    zui的指纹解锁开关
 
     public boolean Flyme(Activity activity, boolean dark) {
         try {
