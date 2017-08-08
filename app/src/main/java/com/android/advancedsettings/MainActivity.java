@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Settings.Secure.putInt(getContentResolver(), "screen_off_fp_unlock_state", 1);   这个为按压解锁
-    //Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 0);    魅族的指纹解锁开关
+    //Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);    魅族的指纹解锁开关
     //Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);    zui的指纹解锁开关
 
     public boolean Flyme(Activity activity, boolean dark) {
