@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         private SwitchPreference DoubleTap;
         private SwitchPreference Charging;
+        private SwitchPreference Proximity;
+        private SwitchPreference COVER;
+        private SwitchPreference FINGERPRINT;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,23 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Charging.setChecked(false);
             }
-
+            if (Settings.System.getInt(getContentResolver(), "unlock_proximity_enable", 0) == 1) {
+                Proximity.setChecked(true);
+            } else  {
+                Proximity.setChecked(false);
+            }
+            if (Settings.Secure.getInt(getContentResolver(), "COVER_MODE_STATE", 0) == 1) {
+                COVER.setChecked(true);
+            } else  {
+                COVER.setChecked(false);
+            }
+            if (Settings.System.getInt(getContentResolver(), "mz_fingerprint_use_unlock", 0) == 1) {
+                Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);
+                FINGERPRINT.setChecked(true);
+            } else  {
+                Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 0);
+                FINGERPRINT.setChecked(false);
+            }
         }
 
         public void init() {
@@ -57,20 +76,46 @@ public class MainActivity extends AppCompatActivity {
             DoubleTap.setOnPreferenceChangeListener(this);
             Charging = (SwitchPreference) findPreference("Charging");
             Charging.setOnPreferenceChangeListener(this);
+            Proximity = (SwitchPreference) findPreference("proximity");
+            Proximity.setOnPreferenceChangeListener(this);
+            COVER = (SwitchPreference) findPreference("cover");
+            COVER.setOnPreferenceChangeListener(this);
+            FINGERPRINT = (SwitchPreference) findPreference("fingerprint");
+            FINGERPRINT.setOnPreferenceChangeListener(this);
         }
 
         public boolean onPreferenceChange(Preference Preference, Object Object) {
             if (Preference == DoubleTap) {
-                if (DoubleTap.isChecked()) {
-                    Settings.System.putInt(getContentResolver(), "double_tap_enable", 0);
-                } else {
+                if (!DoubleTap.isChecked()) {
                     Settings.System.putInt(getContentResolver(), "double_tap_enable", 1);
+                } else {
+                    Settings.System.putInt(getContentResolver(), "double_tap_enable", 0);
                 }
             } else if (Preference == Charging) {
-                if (Charging.isChecked()) {
-                    Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 0);
-                } else {
+                if (!Charging.isChecked()) {
                     Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 1);
+                } else {
+                    Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 0);
+                }
+            } else if (Preference == Proximity) {
+                if (!Proximity.isChecked()) {
+                    Settings.System.putInt(getContentResolver(), "unlock_proximity_enable", 1);
+                } else {
+                    Settings.System.putInt(getContentResolver(), "unlock_proximity_enable", 0);
+                }
+            } else if (Preference == COVER){
+                if (!COVER.isChecked()) {
+                    Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
+                } else {
+                    Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
+                }
+            } else if (Preference == FINGERPRINT){
+                if (!FINGERPRINT.isChecked()) {
+                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);
+                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);
+                } else {
+                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 0);
+                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 0);
                 }
             }
             return true;
@@ -93,10 +138,32 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Settings.System.putInt(getContentResolver(), "CHARGING_LIGHT_PULSE", 0);
                 }
+            } else if (Preference == Proximity) {
+                if (Proximity.isChecked()) {
+                    Settings.System.putInt(getContentResolver(), "unlock_proximity_enable", 1);
+                } else {
+                    Settings.System.putInt(getContentResolver(), "unlock_proximity_enable", 0);
+                }
+            } else if (Preference == COVER){
+                if (COVER.isChecked()) {
+                    Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
+                } else {
+                    Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
+                }
+            } else if (Preference == FINGERPRINT){
+                if (FINGERPRINT.isChecked()) {
+                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);
+                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);
+                } else {
+                    Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 0);
+                    Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 0);
+                }
             }
-            return false;
+                return false;
         }
     }
+
+    //Settings.Secure.putInt(getContentResolver(), "screen_off_fp_unlock_state", 1);   这个为按压解锁
 
     public boolean Flyme(Activity activity, boolean dark) {
         try {

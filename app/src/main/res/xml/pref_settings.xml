@@ -2,17 +2,36 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <PreferenceCategory android:title="@string/settings">
     <SwitchPreference
+        android:icon="@mipmap/xui_ic_settings_fingerprint_password"
+        android:persistent="false"
+        android:key="fingerprint"
+        android:title="@string/unlock"
+        android:summary="@string/unlock1"/>
+    <SwitchPreference
         android:icon="@mipmap/xui_ic_settings_control_center"
         android:persistent="false"
         android:key="double_tap"
-        android:title="@string/double_tap" />
+        android:title="@string/double_tap"
+        android:summary="@string/double_tap1"/>
+    <SwitchPreference
+        android:icon="@mipmap/xui_ic_settings_security_privacy"
+        android:persistent="false"
+        android:key="cover"
+        android:title="@string/cover"
+        android:summary="@string/cover1"/>
     <SwitchPreference
         android:icon="@mipmap/xui_ic_settings_notification_statusbar"
         android:persistent="false"
         android:key="Charging"
         android:title="@string/Charging"
         android:summary="@string/Charging1"/>
-     <PreferenceScreen
+    <SwitchPreference
+        android:icon="@mipmap/xui_ic_settings_wallpaper"
+        android:persistent="false"
+        android:key="proximity"
+        android:title="@string/cover"
+        android:summary="@string/cover1"/>
+    <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_utouch"
         android:title="@string/u_touch_settings">
         <intent
@@ -22,23 +41,23 @@
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_displaylight"
-        android:title="@string/screen_color" >
+        android:title="@string/screen_color">
             <intent
                 android:targetPackage="com.android.exsettings"
                 android:action="android.intent.action.MAIN"
                 android:targetClass="com.android.exsettings.Settings$ScreenTonePrefs" />
     </PreferenceScreen>
-    <PreferenceScreen
-        android:icon="@mipmap/xui_ic_settings_fingerprint_password"
-        android:title="@string/unlock" >
-        <intent
-            android:targetPackage="com.android.exsettings"
-            android:action="android.intent.action.MAIN"
-            android:targetClass="com.android.exsettings.fap.FapFpSettingsActivity">
-        </intent>
-    </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about">
+    <PreferenceScreen
+            android:icon="@mipmap/xui_ic_settings_fingerprint_password"
+            android:title="@string/update">
+        <intent
+            android:targetPackage="com.sun.beizikeji.ota"
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.sun.beizikeji.ota.MainActivity">
+        </intent>
+    </PreferenceScreen>
     <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_about"
         android:summary="@string/author1"
