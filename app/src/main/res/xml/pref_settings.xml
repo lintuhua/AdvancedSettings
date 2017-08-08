@@ -50,7 +50,7 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about">
     <PreferenceScreen
-            android:icon="@mipmap/xui_ic_settings_fingerprint_password"
+            android:icon="@mipmap/xui_ic_settings_ota"
             android:title="@string/update">
         <intent
             android:targetPackage="com.sun.beizikeji.ota"
