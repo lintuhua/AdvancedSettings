@@ -29,8 +29,8 @@
         android:icon="@mipmap/xui_ic_settings_wallpaper"
         android:persistent="false"
         android:key="proximity"
-        android:title="@string/cover"
-        android:summary="@string/cover1"/>
+        android:title="@string/proximity"
+        android:summary="@string/proximity1"/>
     <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_utouch"
         android:title="@string/u_touch_settings">
