@@ -7,8 +7,6 @@
     <string name="Charging1">充电时呼吸灯常亮</string>
     <string name="u_touch_settings">U-Touch</string>
     <string name="screen_color">屏幕色调</string>
-    <string name="unlock">指纹解锁</string>
-    <string name="unlock1">将指纹应用于解锁</string>
     <string name="cover">皮套解锁</string>
     <string name="cover1">无密码状态下，打开皮套跳过锁屏界面</string>
     <string name="proximity">防误触</string>
