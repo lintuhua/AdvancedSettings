@@ -1,6 +1,8 @@
 package com.android.advancedsettings;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Flyme(this,true);
+        Flyme(this, true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         private SwitchPreference Charging;
         private SwitchPreference Proximity;
         private SwitchPreference COVER;
+        private PreferenceScreen Author;
+        private PreferenceScreen Pay;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -53,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
             }
             if (Settings.System.getInt(getContentResolver(), "unlock_proximity_enable", 0) == 1) {
                 Proximity.setChecked(true);
-            } else  {
+            } else {
                 Proximity.setChecked(false);
             }
             if (Settings.Secure.getInt(getContentResolver(), "COVER_MODE_STATE", 0) == 1) {
                 COVER.setChecked(true);
-            } else  {
+            } else {
                 COVER.setChecked(false);
             }
         }
@@ -72,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
             Proximity.setOnPreferenceChangeListener(this);
             COVER = (SwitchPreference) findPreference("cover");
             COVER.setOnPreferenceChangeListener(this);
+            Author = (PreferenceScreen) findPreference("author");
+            Author.setOnPreferenceClickListener(this);
+            Pay = (PreferenceScreen) findPreference("pay");
+            Pay.setOnPreferenceClickListener(this);
         }
 
         public boolean onPreferenceChange(Preference Preference, Object Object) {
@@ -93,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Settings.System.putInt(getContentResolver(), "unlock_proximity_enable", 0);
                 }
-            } else if (Preference == COVER){
+            } else if (Preference == COVER) {
                 if (!COVER.isChecked()) {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
                 } else {
@@ -126,14 +134,34 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Settings.System.putInt(getContentResolver(), "unlock_proximity_enable", 0);
                 }
-            } else if (Preference == COVER){
+            } else if (Preference == COVER) {
                 if (COVER.isChecked()) {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
                 } else {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
                 }
+            } else if (Preference == Author) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                intent.setData(Uri.parse("sinaweibo://userinfo?uid=2814183402"));
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    intent.setData(Uri.parse("http://weibo.2814183402/2814183402"));
+                    startActivity(intent);
+                }
+            } else if (Preference == Pay) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                intent.setData(Uri.parse("alipayqr://platformapi/startapp?saId=10000007&clientVersion=3.7.0.0718&qrcode=https://qr.alipay.com/FKX07789ZBGHPQUFF3XWAE"));
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    intent.setData(Uri.parse("https://qr.alipay.com/FKX07789ZBGHPQUFF3XWAE"));
+                    startActivity(intent);
+                }
             }
-                return false;
+            return false;
         }
     }
 

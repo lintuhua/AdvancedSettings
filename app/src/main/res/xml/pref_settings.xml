@@ -44,8 +44,8 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about">
     <PreferenceScreen
-            android:icon="@mipmap/xui_ic_settings_ota"
-            android:title="@string/update">
+        android:icon="@mipmap/xui_ic_settings_ota"
+        android:title="@string/update">
         <intent
             android:targetPackage="com.sun.beizikeji.ota"
             android:action="android.intent.action.MAIN"
@@ -55,10 +55,12 @@
     <PreferenceScreen
         android:icon="@mipmap/xui_ic_settings_about"
         android:summary="@string/author1"
+        android:key="author"
         android:title="@string/author">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="http://weibo.com/MobilePlayers" />
     </PreferenceScreen>
+    <PreferenceScreen
+        android:icon="@mipmap/share_alipay_all"
+        android:key="pay"
+        android:title="@string/pay"/>
     </PreferenceCategory>
 </PreferenceScreen>
