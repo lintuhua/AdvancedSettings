@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -12,13 +13,24 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 public class MainActivity extends AppCompatActivity {
+
+    private String romer;
+    private String user;
+    private String host;
+    private String mromer;
+    private String smodel;
+    private String sseries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        check();
         Flyme(this, true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
@@ -168,6 +180,19 @@ public class MainActivity extends AppCompatActivity {
     //Settings.Secure.putInt(getContentResolver(), "screen_off_fp_unlock_state", 1);   这个为按压解锁
     //Settings.System.putInt(getContentResolver(), "mz_fingerprint_use_unlock", 1);    魅族的指纹解锁开关
     //Settings.Secure.putInt(getContentResolver(), "FINGERPRINT_UNLOCK_DEVICE", 1);    zui的指纹解锁开关
+
+    private void check() {
+        romer = SystemProperties.get("ro.flyme.romer");
+        mromer = SystemProperties.get("ro.product.model_romer");
+        user = SystemProperties.get("ro.build.user");
+        host = SystemProperties.get("ro.build.host");
+        smodel = SystemProperties.get("ro.sun.ota.build.model");
+        sseries = SystemProperties.get("ro.sun.ota.build.series");
+        if (!romer.equals("hchyhchyxh") || !mromer.equals("ZUK-Z2131_hchyhchyxh") || !user.equals("hchyhchyxh") || !host.equals("hchyhchyxh-pc") || !smodel.equals("ZUK Z2131") || !sseries.equals("Flyme6")) {
+            Toast.makeText(getApplicationContext(), "您当前使用的ROM为盗版，请尊重原作者，下载原作者发布的版本使用", LENGTH_LONG).show();
+            finish();
+        }
+    }
 
     public boolean Flyme(Activity activity, boolean dark) {
         try {
