@@ -4,6 +4,11 @@
     <SwitchPreference
         android:icon="@mipmap/xui_ic_settings_control_center"
         android:persistent="false"
+        android:key="task"
+        android:title="@string/task"/>
+    <SwitchPreference
+        android:icon="@mipmap/xui_ic_settings_control_center"
+        android:persistent="false"
         android:key="double_tap"
         android:title="@string/double_tap"
         android:summary="@string/double_tap1"/>

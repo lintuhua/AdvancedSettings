@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
+        private SwitchPreference Task;
         private SwitchPreference DoubleTap;
         private SwitchPreference Charging;
         private SwitchPreference Proximity;
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 COVER.setChecked(false);
             }
+            if (Settings.Secure.getInt(getContentResolver(), "TASK", 0) == 1) {
+                Task.setChecked(true);
+            } else {
+                Task.setChecked(false);
+            }
         }
 
         public void init() {
@@ -92,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             Author.setOnPreferenceClickListener(this);
             Pay = (PreferenceScreen) findPreference("pay");
             Pay.setOnPreferenceClickListener(this);
+            Task = (SwitchPreference) findPreference("task");
+            Task.setOnPreferenceChangeListener(this);
         }
 
         public boolean onPreferenceChange(Preference Preference, Object Object) {
@@ -118,6 +126,12 @@ public class MainActivity extends AppCompatActivity {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
                 } else {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
+                }
+            } else if (Preference == Task) {
+                if (!Task.isChecked()) {
+                    Settings.Secure.putInt(getContentResolver(), "TASK", 1);
+                } else {
+                    Settings.Secure.putInt(getContentResolver(), "TASK", 0);
                 }
             }
             return true;
@@ -151,6 +165,12 @@ public class MainActivity extends AppCompatActivity {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 1);
                 } else {
                     Settings.Secure.putInt(getContentResolver(), "COVER_MODE_STATE", 0);
+                }
+            } else if (Preference == Task) {
+                if (Task.isChecked()) {
+                    Settings.Secure.putInt(getContentResolver(), "TASK", 1);
+                } else {
+                    Settings.Secure.putInt(getContentResolver(), "TASK", 0);
                 }
             } else if (Preference == Author) {
                 Intent intent = new Intent();

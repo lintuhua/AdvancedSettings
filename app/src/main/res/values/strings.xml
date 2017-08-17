@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">附加设置</string>
     <string name="settings">设置</string>
+    <string name="task">上划多任务</string>
     <string name="double_tap">双击唤醒</string>
     <string name="double_tap1">黑屏状态下，双击唤醒屏幕</string>
     <string name="Charging">呼吸灯</string>
